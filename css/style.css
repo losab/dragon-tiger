@@ -78,33 +78,24 @@ body, html {
     height: 70px;  
     object-fit: contain;
     position: absolute;
+    top: 0%;
     left: 0.66%;
+    transition: 0.5s;
+    transform: translate(0%, 0%) rotate(0deg);
 }
 
 .used-card {
     left: 96.5%;
+    top: 0% !important;
 }
 
 /**/
-/*
-.timer {
-    background-color: #fff;
-    position: absolute;
-    
-    width: 120px;
-    height: 120px;
-    
-    counter-reset: my-count 5;
-  animation: countdown 5s linear infinite;
-  color: black;
-  
-} */
 .timer-box {
     position: absolute;
     position: fixed;
-  top: 22%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    top: 22%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .timer {
     position: relative;
@@ -251,14 +242,13 @@ body, html {
     width: 90px;
     height: 120px; 
     left: 38%;
-    top: 43%;
-    
+    top: 43% !important;
 }
 .current-tiger {
     width: 90px;
     height: 120px; 
     left: 56%;
-    top: 43%; 
+    top: 43% !important; 
 }
 .winner-side {
     position: absolute;
@@ -268,5 +258,20 @@ body, html {
     left: 50%;
     transform: translate(-50%,-50%);
     background: rgb(103,115,133);
-    padding: 5px;
+    padding: 9.9999px 16px;
+    border-radius: 5px;
+    display: none;
+    z-index: 999;
+}
+.points {
+    position: absolute;
+    font-size: 20px;
+    color: #fff;
+    right: 1%;
+    bottom: 0%;
+    transform: translate(-50%,-50%);
+    background: rgb(103,115,133);
+    padding: 9.9999px 16px;
+    border-radius: 5px;
+    z-index: 99;
 }

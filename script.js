@@ -1,23 +1,25 @@
 import initialCards from './cards.js';
 
 
-const cardDeck = document.querySelector('.container')
-let playerPoints = 100;
-const latestWins = [];
-let canDecide =false;
-
+    const cardDeck = document.querySelector('.container');
+    const winnerSide =document.querySelector('.winner-side');
+    const userPoints = document.querySelector('.user-points');
+    let playerPoints = 100;
+    const latestWins = [];
+    let canDecide =false;
+    userPoints.innerHTML=playerPoints;
 // 1. Shuffle Cards
     let shuffledCards = initialCards;
     for (let i = shuffledCards.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
 }
-    console.log(shuffledCards)
     
     shuffledCards.forEach((element, i) => {
         const image = document.createElement('img');
         image.setAttribute('src', 'images/cards.jpeg');
         image.setAttribute('class', 'all-cards');
+        image.setAttribute('style', `top: ${i}%`)
         image.setAttribute('data-id', i);
         cardDeck.appendChild(image);
     });
@@ -73,25 +75,36 @@ let canDecide =false;
 
     function reveal() {
         canDecide=false;
-        playerDecision='';
-        buttonStyles('');
         const pair = pairArr[gameCount];
         document.querySelector(`[data-id="${pairPosition}"]`).setAttribute('src', `${pair[0].image}`);
         document.querySelector(`[data-id="${pairPosition+1}"]`).setAttribute('src', `${pair[1].image}`);
-        if (pair[0].value>pair[1].value) winner='dragon';
-        if (pair[0].value<pair[1].value) winner='tiger';
-        if(pair[0].value=pair[1].value) winner = 'tie';
+        winnerSide.setAttribute('style', 'display:block')
+        if (pair[0].value > pair[1].value) {
+            winnerSide.innerHTML = 'Dragon Wins!'
+            winner='dragon';
+        }
+        if (pair[0].value < pair[1].value) {
+            winnerSide.innerHTML = 'Tiger Wins!'
+            winner='tiger';
+        }
+        if(pair[0].value === pair[1].value){
+            winnerSide.innerHTML = 'Tie!'
+            winner = 'tie';
+        } 
        if(playerDecision!==''){
-        if(winner=playerDecision) playerPoints +=10;
-        else playerPoints -=10;
+        if(winner===playerDecision) return playerPoints+=10;
+        return playerPoints-=10;
        }
     }
-    function newGame() {       
+    function newGame() {   
+        buttonStyles('');  
+        playerDecision='';  
+        winnerSide.removeAttribute('style');
         document.querySelector(`[data-id="${pairPosition}"]`).setAttribute('class', 'all-cards used-card');
         document.querySelector(`[data-id="${pairPosition+1}"]`).setAttribute('class', 'all-cards used-card');
         document.querySelector(`[data-id="${pairPosition}"]`).setAttribute('src', 'images/cards.jpeg');
         document.querySelector(`[data-id="${pairPosition+1}"]`).setAttribute('src', 'images/cards.jpeg');
-
+        userPoints.innerHTML=playerPoints;
         gameCount++;
         pairPosition+=2;
         dealPair();
