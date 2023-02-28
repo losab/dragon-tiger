@@ -4,8 +4,9 @@ import initialCards from './cards.js';
     const cardDeck = document.querySelector('.container');
     const winnerSide =document.querySelector('.winner-side');
     const userPoints = document.querySelector('.user-points');
+    const latestWinners = document.querySelector('.latest-wins')
     let playerPoints = 100;
-    const latestWins = [];
+    let latestWins = [];
     let canDecide =false;
     userPoints.innerHTML=playerPoints;
 // 1. Shuffle Cards
@@ -91,6 +92,7 @@ import initialCards from './cards.js';
             winnerSide.innerHTML = 'Tie!'
             winner = 'tie';
         } 
+        latestWins= [...latestWins, winner]
        if(playerDecision!==''){
         if(winner===playerDecision) return playerPoints+=10;
         return playerPoints-=10;
@@ -99,6 +101,9 @@ import initialCards from './cards.js';
     function newGame() {   
         buttonStyles('');  
         playerDecision='';  
+        const newBall =document.createElement('span');
+        newBall.setAttribute('class', `ball -${winner}`);
+        latestWinners.appendChild(newBall);
         winnerSide.removeAttribute('style');
         document.querySelector(`[data-id="${pairPosition}"]`).setAttribute('class', 'all-cards used-card');
         document.querySelector(`[data-id="${pairPosition+1}"]`).setAttribute('class', 'all-cards used-card');
