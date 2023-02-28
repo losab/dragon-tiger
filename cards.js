@@ -9,7 +9,7 @@ const cards = [
     },
     {
         "value": 2,
-        "image": `$${defaultPath}2_of_hearts.png`,
+        "image": `${defaultPath}2_of_hearts.png`,
         "isHidden": true
     },
     {
