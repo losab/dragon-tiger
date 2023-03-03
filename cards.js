@@ -4,7 +4,6 @@ const cards = [
     {
         "value": 1,
         "image": `${defaultPath}ace_of_hearts.png`,
-        "image": "./images",
         "isHidden": true
     },
     {
